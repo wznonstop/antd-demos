@@ -22,6 +22,10 @@ class Demo extends React.Component {
     ],
     selectedKeys: [],
   }
+
+  /**
+   * 模拟获取数据
+   */
   onLoadData = (treeNode) => {
     return new Promise((resolve) => {
       if (treeNode.props.children) {
@@ -40,14 +44,18 @@ class Demo extends React.Component {
       }, 100);
     });
   }
+
+
   onTreeSelect = (selectedKeys, info) => {
     console.log('onSelect', info);
     console.log('selectedKeys', selectedKeys);
     this.setState({selectedKeys});
   }
 
+  /**
+   * 判断要对单个节点执行的是哪种操作
+   */
   onTreeClick = (e) => {
-    console.log(e);
     const targetCls = e.target.className;
 
     let targetType;
@@ -64,25 +72,28 @@ class Demo extends React.Component {
     switch (targetType) {
       case 0:
         //跳往编辑页
-        console.log('跳往编辑页');
+        alert('跳往编辑页');
         break;
       case 1:
         //气泡确认框处理
-        console.log('气泡确认框处理');
+        alert('气泡确认框处理');
         break;
       case 2:
         //跳往新增页面
-        console.log('跳往新增页面');
+        alert('跳往新增页面');
         break;
       default:
         //do something
     }
   }
 
-  handleDeleteTree = (e) => {
-    console.log('封存组织');
+  onTreeDelete = (e) => {
+    alert('封存组织');
   }
 
+  /**
+   * 自定义叶子节点
+   */
   getCustomTreeNode = (data, key) => {
     const {selectedKeys} = this.state;
     const nodeCls = selectedKeys[0] === key ? 'cus-tree-node' : 'cus-tree-node hide-tree-opt';
@@ -93,7 +104,7 @@ class Demo extends React.Component {
         <Popconfirm placement="bottomLeft" title="你确定要删除吗"
           okText="确定"
           cancelText="取消"
-          onConfirm={this.handleDeleteTree}
+          onConfirm={this.onTreeDelete}
         >
           <Icon type="minus-circle-o" className='tree-minus-icon tree-icon'/>
         </Popconfirm>
@@ -102,6 +113,9 @@ class Demo extends React.Component {
     </span>)
   }
 
+  /**
+   * 设置叶子节点
+   */
   renderTreeNodes = (data) => {
     return data.map((item) => {
       if (item.children) {
