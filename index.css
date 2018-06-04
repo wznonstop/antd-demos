@@ -1,0 +1,13 @@
+
+html, body, #root {
+  height: 100%;
+}
+.hide-tree-opt > .tree-opt{
+  display: none;
+}
+.tree-icon {
+  margin-left: 8px;
+}
+.tree-edit-icon {
+  margin-left: 25px;
+}
